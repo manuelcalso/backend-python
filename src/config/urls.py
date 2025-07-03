@@ -18,11 +18,13 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("up/", include("up.urls")),
-    path("", include("pages.urls")),
+    path("ecommerce/", include("ecommerce.urls")),
     path("admin/", admin.site.urls),
+    path("", RedirectView.as_view(url="/ecommerce/", permanent=False)),  # Redirige raíz a ecommerce
 ]
 if not settings.TESTING:
     urlpatterns = [
